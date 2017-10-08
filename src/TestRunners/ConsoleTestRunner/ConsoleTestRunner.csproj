@@ -9,10 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MoonSharpTests</RootNamespace>
     <AssemblyName>ConsoleTestRunner</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -122,13 +121,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MoonSharp.Interpreter.Tests\MoonSharp.Interpreter.Tests.net35-client.csproj">
-      <Project>{4ad350e6-e296-43ef-9fea-cb70358467e4}</Project>
-      <Name>MoonSharp.Interpreter.Tests.net35-client</Name>
+    <ProjectReference Include="..\..\MoonSharp.Interpreter.Tests\_Projects\MoonSharp.Interpreter.Tests.net40-client\MoonSharp.Interpreter.Tests.net40-client.csproj">
+      <Project>{4e54a863-7b53-4914-b9e0-c2172de9df72}</Project>
+      <Name>MoonSharp.Interpreter.Tests.net40-client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MoonSharp.Interpreter\MoonSharp.Interpreter.net35-client.csproj">
-      <Project>{91ea9b9d-fe03-4273-bdaf-8ad42ede1e59}</Project>
-      <Name>MoonSharp.Interpreter.net35-client</Name>
+    <ProjectReference Include="..\..\MoonSharp.Interpreter\_Projects\MoonSharp.Interpreter.net40-client\MoonSharp.Interpreter.net40-client.csproj">
+      <Project>{88d2880c-a863-4b16-abef-f67bd1e98bd1}</Project>
+      <Name>MoonSharp.Interpreter.net40-client</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
