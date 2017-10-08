@@ -140,9 +140,9 @@ namespace MoonSharp.Interpreter.Tests.EndToEnd
 		[Test]
 		public void JsonEscapeSequences()
 		{
-			string json = "{ \"anEscapedString\": \"\\a\\r\\n\\b\\f\\n\\r\\t\\v\\\\\\\"\\'\\[\\]\\/\" }";
+			string json = "{ \"anEscapedString\": \"\\a\\b\\f\\n\\r\\t\\v\\\\\\\"\\'\\[\\]\\/\" }";
 			Table table = JsonTableConverter.JsonToTable(json);
-			Assert.AreEqual(table.Get("anEscapedString").String, "\a\n\b\f\n\r\t\v\\\"\'[]/");
+			Assert.AreEqual(table.Get("anEscapedString").String, "\a\b\f\n\r\t\v\\\"\'[]/");
 		}
 
 	}
