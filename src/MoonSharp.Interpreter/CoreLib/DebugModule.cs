@@ -82,7 +82,7 @@ namespace MoonSharp.Interpreter.CoreLib
 			DynValue v = args[0];
 			Script S = executionContext.GetScript();
 
-			if (v.Type.CanHaveTypeMetatables())
+			if (v.Type.CanHaveTypeMetatables() && S.GetTypeMetatable(v.Type) != null)
 				return DynValue.NewTable(S.GetTypeMetatable(v.Type));
 			else if (v.Type == DataType.Table && v.Table.MetaTable != null)
 				return DynValue.NewTable(v.Table.MetaTable);
