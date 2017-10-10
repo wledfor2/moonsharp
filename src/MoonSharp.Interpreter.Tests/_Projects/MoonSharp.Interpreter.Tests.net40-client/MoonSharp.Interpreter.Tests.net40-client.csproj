@@ -213,6 +213,18 @@
     <Compile Include="..\..\_Hardwired.cs">
       <Link>_Hardwired.cs</Link>
     </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsExtensionMethodTests.cs">
+      <Link>UserDataNameOptionsExtensionMethodTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsFieldTests.cs">
+      <Link>UserDataNameOptionsFieldTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsMethodTests.cs">
+      <Link>UserDataNameOptionsMethodTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsPropertiesTests.cs">
+      <Link>UserDataNameOptionsPropertiesTests.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MoonSharp.Interpreter\_Projects\MoonSharp.Interpreter.net40-client\MoonSharp.Interpreter.net40-client.csproj">

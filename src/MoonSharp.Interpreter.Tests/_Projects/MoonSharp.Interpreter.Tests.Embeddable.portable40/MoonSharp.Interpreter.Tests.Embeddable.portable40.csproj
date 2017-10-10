@@ -167,6 +167,18 @@
     <Compile Include="..\..\EndToEnd\Utils.cs">
       <Link>Utils.cs</Link>
     </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsExtensionMethodTests.cs">
+      <Link>UserDataNameOptionsExtensionMethodTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsFieldTests.cs">
+      <Link>UserDataNameOptionsFieldTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsMethodTests.cs">
+      <Link>UserDataNameOptionsMethodTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsPropertiesTests.cs">
+      <Link>UserDataNameOptionsPropertiesTests.cs</Link>
+    </Compile>
     <Compile Include="..\..\Properties\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>

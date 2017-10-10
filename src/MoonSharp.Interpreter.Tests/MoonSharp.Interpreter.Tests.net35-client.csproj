@@ -157,6 +157,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EndToEnd\SimpleTests.cs" />
     <Compile Include="EndToEnd\TableTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsExtensionMethodTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsFieldTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsMethodTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsPropertiesTests.cs" />
     <Compile Include="TapRunner.cs" />
     <Compile Include="TestMoreTests.cs" />
     <Compile Include="TestRunner.cs" />

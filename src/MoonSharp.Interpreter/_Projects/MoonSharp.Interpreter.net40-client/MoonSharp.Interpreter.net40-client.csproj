@@ -552,6 +552,9 @@
     <Compile Include="..\..\Options\ColonOperatorBehaviour.cs">
       <Link>ColonOperatorBehaviour.cs</Link>
     </Compile>
+    <Compile Include="..\..\Options\DescriptorNameBehaviour.cs">
+      <Link>DescriptorNameBehaviour.cs</Link>
+    </Compile>
     <Compile Include="..\..\REPL\ReplHistoryNavigator.cs">
       <Link>ReplHistoryNavigator.cs</Link>
     </Compile>
