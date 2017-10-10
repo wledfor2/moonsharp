@@ -388,6 +388,7 @@
     <Compile Include="Tree\Expressions\TableConstructor.cs" />
     <Compile Include="Tree\Statements\ScopeBlockStatement.cs" />
     <Compile Include="Tree\Statements\WhileStatement.cs" />
+    <Compile Include="Options\DescriptorNameBehaviour.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
