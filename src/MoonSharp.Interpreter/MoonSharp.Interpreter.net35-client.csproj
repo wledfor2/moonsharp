@@ -294,7 +294,6 @@
     <Compile Include="Loaders\FileSystemScriptLoader.cs" />
     <Compile Include="Loaders\InvalidScriptLoader.cs" />
     <Compile Include="Options\ColonOperatorBehaviour.cs" />
-    <Compile Include="Options\DescriptorNameBehaviour.cs" />
     <Compile Include="REPL\ReplHistoryNavigator.cs" />
     <Compile Include="REPL\ReplInterpreterScriptLoader.cs" />
     <Compile Include="Loaders\ScriptLoaderBase.cs" />
