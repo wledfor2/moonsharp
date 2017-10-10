@@ -55,11 +55,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\MoonSharp.Interpreter\_Projects\MoonSharp.Interpreter.net46\MoonSharp.Interpreter.net46.csproj">
       <Project>{9AA60571-754D-442E-922D-CFC7CC66808C}</Project>
-      <Name>MoonSharp.Hardwire.net46</Name>
+      <Name>MoonSharp.Interpreter.net46</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MoonSharp.Hardwire\_Projects\MoonSharp.HardWire.net46\MoonSharp.HardWire.net46.csproj">
       <Project>{487C1507-DD18-44F9-81D1-EAD67F943B2D}</Project>
-      <Name>MoonSharp.Interpreter.net46</Name>
+      <Name>MoonSharp.HardWire.net46</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
