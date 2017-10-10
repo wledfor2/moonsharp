@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MoonSharp.Interpreter.Compatibility;
 
 namespace MoonSharp.Interpreter.Loaders
 {
@@ -30,10 +31,14 @@ namespace MoonSharp.Interpreter.Loaders
 		public UnityAssetsScriptLoader(string assetsPath = null)
 		{
 			assetsPath = assetsPath ?? DEFAULT_PATH;
+#if UNITY_5
+            LoadResourcesUnityNative(assetsPath);
+#else
 			LoadResourcesWithReflection(assetsPath);
+#endif
 		}
 
-		 
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UnityAssetsScriptLoader"/> class.
 		/// </summary>
@@ -43,6 +48,30 @@ namespace MoonSharp.Interpreter.Loaders
 			m_Resources = scriptToCodeMap;
 		}
 
+#if UNITY_5
+        void LoadResourcesUnityNative(string assetsPath)
+        {
+            try
+            {
+                UnityEngine.Object[] array = UnityEngine.Resources.LoadAll(assetsPath, typeof(UnityEngine.TextAsset));
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    UnityEngine.TextAsset o = (UnityEngine.TextAsset)array[i];
+
+                    string name = o.name;
+                    string text = o.text;
+
+                    m_Resources.Add(name, text);
+                }
+            }
+            catch (Exception ex)
+            {
+                UnityEngine.Debug.LogErrorFormat("Error initializing UnityScriptLoader : {0}", ex);
+            }
+        }
+
+#else
 
 		void LoadResourcesWithReflection(string assetsPath)
 		{
@@ -51,10 +80,10 @@ namespace MoonSharp.Interpreter.Loaders
 				Type resourcesType = Type.GetType("UnityEngine.Resources, UnityEngine");
 				Type textAssetType = Type.GetType("UnityEngine.TextAsset, UnityEngine");
 
-				MethodInfo textAssetNameGet = textAssetType.GetProperty("name").GetGetMethod();
-				MethodInfo textAssetTextGet = textAssetType.GetProperty("text").GetGetMethod();
+				MethodInfo textAssetNameGet = Framework.Do.GetGetMethod(Framework.Do.GetProperty(textAssetType, "name"));
+				MethodInfo textAssetTextGet = Framework.Do.GetGetMethod(Framework.Do.GetProperty(textAssetType, "text"));
 
-				MethodInfo loadAll = resourcesType.GetMethod("LoadAll",
+				MethodInfo loadAll = Framework.Do.GetMethod(resourcesType, "LoadAll",
 					new Type[] { typeof(string), typeof(Type) });
 
 				Array array = (Array)loadAll.Invoke(null, new object[] { assetsPath, textAssetType });
@@ -71,11 +100,13 @@ namespace MoonSharp.Interpreter.Loaders
 			}
 			catch (Exception ex)
 			{
-#if !PCL
+#if !(PCL || ENABLE_DOTNET || NETFX_CORE)
 				Console.WriteLine("Error initializing UnityScriptLoader : {0}", ex);
 #endif
+				System.Diagnostics.Debug.WriteLine(string.Format("Error initializing UnityScriptLoader : {0}", ex));
 			}
 		}
+#endif
 
 		private string GetFileName(string filename)
 		{

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using MoonSharp.Interpreter.Compatibility;
 
 namespace MoonSharp.Interpreter.Tree
 {
@@ -137,7 +138,7 @@ namespace MoonSharp.Interpreter.Tree
 
 		public static string UnescapeLuaString(Token token, string str)
 		{
-			if (!str.Contains('\\'))
+			if (!Framework.Do.StringContainsChar(str, '\\'))
 				return str;
 
 			StringBuilder sb = new StringBuilder();
@@ -166,6 +167,8 @@ namespace MoonSharp.Interpreter.Tree
 						else if (c == 't') { sb.Append('\t'); escape = false; }
 						else if (c == 'v') { sb.Append('\v'); escape = false; }
 						else if (c == '\\') { sb.Append('\\'); escape = false; zmode = false; }
+						// Forward slash is escaped in json, which also uses this lexer.
+						else if (c == '/') { sb.Append('/'); escape = false; zmode = false; }
 						else if (c == '"') { sb.Append('\"'); escape = false; zmode = false; }
 						else if (c == '\'') { sb.Append('\''); escape = false; zmode = false; }
 						else if (c == '[') { sb.Append('['); escape = false; zmode = false; }
@@ -283,7 +286,7 @@ namespace MoonSharp.Interpreter.Tree
 
 		private static string ConvertUtf32ToChar(int i)
 		{
-#if PCL
+#if PCL || ENABLE_DOTNET
 			return ((char)i).ToString();
 #else
 			return char.ConvertFromUtf32(i);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MoonSharp.Interpreter.Compatibility;
 using MoonSharp.Interpreter.DataStructs;
 using MoonSharp.Interpreter.Interop.BasicDescriptors;
 using MoonSharp.Interpreter.Interop.StandardDescriptors;
@@ -36,8 +37,8 @@ namespace MoonSharp.Interpreter.Interop
 			if (!CheckEventIsCompatible(ei, false))
 				return null;
 
-	        MethodInfo addm = ei.GetAddMethod();
-	        MethodInfo remm = ei.GetRemoveMethod();
+	        MethodInfo addm = Framework.Do.GetAddMethod(ei); 
+	        MethodInfo remm = Framework.Do.GetRemoveMethod(ei);
 
 	        if (ei.GetVisibilityFromAttributes() ?? ((remm != null && remm.IsPublic) && (addm != null && addm.IsPublic)))
 	            return new EventMemberDescriptor(ei, accessMode);
@@ -70,19 +71,19 @@ namespace MoonSharp.Interpreter.Interop
 		/// </exception>
 		public static bool CheckEventIsCompatible(EventInfo ei, bool throwException)
 		{
-			if (ei.DeclaringType.IsValueType)
+			if (Framework.Do.IsValueType(ei.DeclaringType))
 			{
 				if (throwException) throw new ArgumentException("Events are not supported on value types");
 				return false;
 			}
 
-			if ((ei.GetAddMethod(true) == null) || (ei.GetRemoveMethod(true) == null))
+			if ((Framework.Do.GetAddMethod(ei) == null) || (Framework.Do.GetRemoveMethod(ei) == null))
 			{
 				if (throwException) throw new ArgumentException("Event must have add and remove methods");
 				return false;
 			}
 
-			MethodInfo invoke = ei.EventHandlerType.GetMethod("Invoke");
+			MethodInfo invoke = Framework.Do.GetMethod(ei.EventHandlerType, "Invoke");
 
 			if (invoke == null)
 			{
@@ -109,7 +110,7 @@ namespace MoonSharp.Interpreter.Interop
 
 			foreach (ParameterInfo pi in pars)
 			{
-				if (pi.ParameterType.IsValueType)
+				if (Framework.Do.IsValueType(pi.ParameterType))
 				{
 					if (throwException) throw new ArgumentException("Event handler cannot have value type parameters");
 					return false;
@@ -134,8 +135,8 @@ namespace MoonSharp.Interpreter.Interop
 		{
 			CheckEventIsCompatible(ei, true);
 			EventInfo = ei;
-			m_Add = ei.GetAddMethod(true);
-			m_Remove = ei.GetRemoveMethod(true);
+			m_Add = Framework.Do.GetAddMethod(ei);
+			m_Remove = Framework.Do.GetRemoveMethod(ei);
 			IsStatic = m_Add.IsStatic;
 		}
 
@@ -202,10 +203,14 @@ namespace MoonSharp.Interpreter.Interop
 			m_Delegates.GetOrCreate(o, () =>
 				{
 					Delegate d = CreateDelegate(o);
+#if NETFX_CORE
+					Delegate handler = d.GetMethodInfo().CreateDelegate(EventInfo.EventHandlerType, d.Target);
+#else
 					Delegate handler = Delegate.CreateDelegate(EventInfo.EventHandlerType, d.Target, d.Method);
+#endif
 					m_Add.Invoke(o, new object[] { handler });
 					return handler;
-				});
+				}); 
 		}
 
 		private void UnregisterCallback(object o)
@@ -222,7 +227,7 @@ namespace MoonSharp.Interpreter.Interop
 
 		private Delegate CreateDelegate(object sender)
 		{
-			switch (EventInfo.EventHandlerType.GetMethod("Invoke").GetParameters().Length)
+			switch (Framework.Do.GetMethod(EventInfo.EventHandlerType, "Invoke").GetParameters().Length)
 			{
 				case 0:
 					return (EventWrapper00)(() => DispatchEvent(sender));

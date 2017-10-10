@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using MoonSharp.Interpreter.Compatibility;
 using MoonSharp.Interpreter.Interop.Converters;
 
 namespace MoonSharp.Interpreter.Serialization
@@ -37,9 +38,9 @@ namespace MoonSharp.Interpreter.Serialization
 			{
 				Type type = o.GetType();
 
-				foreach (PropertyInfo pi in type.GetProperties())
+				foreach (PropertyInfo pi in Framework.Do.GetProperties(type))
 				{
-					var getter = pi.GetGetMethod();
+					var getter = Framework.Do.GetGetMethod(pi);
 					var isStatic = getter.IsStatic;
 					var obj = getter.Invoke(isStatic ? null : o, null); // convoluted workaround for --full-aot Mono execution
 

@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_3_4;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_3_4;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -45,17 +45,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerKit\AsyncDebugger.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerKit\BlockingQueue.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerKit\IAsyncDebuggerClient.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Debugger\MoonSharpDebugSession.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerLogic\AsyncDebugger.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerLogic\EmptyDebugSession.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerLogic\IAsyncDebuggerClient.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerLogic\MoonSharpDebugSession.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Debugger\DebuggerLogic\VariableInspector.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Debugger\MoonSharpVsCodeDebugServer.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Debugger\SDK\DebugSession.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Debugger\SDK\Protocol.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Debugger\SDK\Utilities.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Debugger\VariableInspector.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\AsyncExtensions.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\CodeAnalysis\AstNode.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Attributes.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Framework.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\Base\FrameworkBase.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\Base\FrameworkClrBase.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\Base\FrameworkReflectionBase.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\FrameworkCLR.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\FrameworkCore.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\FrameworkPCL.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Frameworks\FrameworkWin8.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Compatibility\Stopwatch.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\CoreLib\BasicModule.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\CoreLib\Bit32Module.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\CoreLib\CoroutineModule.cs" />
@@ -207,7 +217,6 @@
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\HardwiredDescriptors\HardwiredMemberDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\HardwiredDescriptors\HardwiredMethodMemberDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\HardwiredDescriptors\HardwiredUserDataDescriptor.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\IUserDataMethodDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\MemberDescriptors\ArrayMemberDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\MemberDescriptors\DynValueMemberDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\MemberDescriptors\FunctionMemberDescriptorBase.cs" />
@@ -222,7 +231,6 @@
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\StandardEnumUserDataDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\StandardGenericsUserDataDescriptor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\StandardUserDataDescriptor.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\StandardDescriptors\StandardUserDataParameter.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\UserDataMemberType.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\UserDataRegistries\ExtensionMethodsRegistry.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Interop\UserDataRegistries\TypeDescriptorRegistry.cs" />
@@ -240,14 +248,11 @@
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Modules\MoonSharpModuleMethodAttribute.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\NameSpace_XmlHelp.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Options\ColonOperatorBehaviour.cs" />
+     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\DotNetCorePlatformAccessor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\IPlatformAccessor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\LimitedPlatformAccessor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\PlatformAccessorBase.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\PlatformAutoDetector.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\PortableWrappers\Attributes.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\PortableWrappers\ExtensionMethods.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\PortableWrappers\Stopwatch.cs" />
-     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\PortableWrappers\Utils.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\StandardFileType.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Platforms\StandardPlatformAccessor.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\REPL\ReplHistoryNavigator.cs" />
@@ -297,6 +302,48 @@
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Tree\Statements\ReturnStatement.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Tree\Statements\ScopeBlockStatement.cs" />
      <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Tree\Statements\WhileStatement.cs" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\105-string.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\310-debug.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\212-function.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\204-grammar.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\305-table.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\101-boolean.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\106-table.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\203-lexico.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\202-expr.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\320-stdin.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\000-sanity.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\309-os.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\223-iterator.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\221-table.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\314-regex.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\107-thread.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\015-forlist.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\231-metatable.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\308-io.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\211-scope.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\222-constructor.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\012-repeat.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\104-number.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\Modules\Test\More.lua.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\232-object.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\301-basic.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\306-math.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\001-if.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\102-function.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\108-userdata.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\Modules\Test\Builder.lua.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\201-assign.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\213-closure.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\014-fornum.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\304-string.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\307-bit.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\002-table.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\011-while.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\200-examples.t.txt" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\214-coroutine.t.txt" />
+     <None Include="Assets\link.xml" />
+     <None Include="Assets\Resources\MoonSharp\Scripts\103-nil.t.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

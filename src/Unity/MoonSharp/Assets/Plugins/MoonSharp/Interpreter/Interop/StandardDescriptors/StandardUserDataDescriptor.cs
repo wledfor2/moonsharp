@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MoonSharp.Interpreter.Compatibility;
 using MoonSharp.Interpreter.Interop.BasicDescriptors;
 
 namespace MoonSharp.Interpreter.Interop
@@ -45,8 +46,7 @@ namespace MoonSharp.Interpreter.Interop
 		private void FillMemberList()
 		{
 			HashSet<string> membersToIgnore = new HashSet<string>(
-				this.Type
-					.GetCustomAttributes(typeof(MoonSharpHideMemberAttribute), true)
+				Framework.Do.GetCustomAttributes(this.Type, typeof(MoonSharpHideMemberAttribute), true)
 					.OfType<MoonSharpHideMemberAttribute>()
 					.Select(a => a.MemberName)
 				);
@@ -56,22 +56,25 @@ namespace MoonSharp.Interpreter.Interop
 			if (AccessMode == InteropAccessMode.HideMembers)
 				return;
 
-			// add declared constructors
-			foreach (ConstructorInfo ci in type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+			if (!type.IsDelegateType())
 			{
-				if (membersToIgnore.Contains("__new"))
-					continue;
+				// add declared constructors
+				foreach (ConstructorInfo ci in Framework.Do.GetConstructors(type))
+				{
+					if (membersToIgnore.Contains("__new"))
+						continue;
 
-				AddMember("__new", MethodMemberDescriptor.TryCreateIfVisible(ci, this.AccessMode));
+					AddMember("__new", MethodMemberDescriptor.TryCreateIfVisible(ci, this.AccessMode));
+				}
+
+				// valuetypes don't reflect their empty ctor.. actually empty ctors are a perversion, we don't care and implement ours
+				if (Framework.Do.IsValueType(type) && !membersToIgnore.Contains("__new"))
+					AddMember("__new", new ValueTypeDefaultCtorMemberDescriptor(type));
 			}
-
-			// valuetypes don't reflect their empty ctor.. actually empty ctors are a perversion, we don't care and implement ours
-			if (type.IsValueType && !membersToIgnore.Contains("__new"))
-				AddMember("__new", new ValueTypeDefaultCtorMemberDescriptor(type));
 
 
 			// add methods to method list and metamethods
-			foreach (MethodInfo mi in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+			foreach (MethodInfo mi in Framework.Do.GetMethods(type))
 			{
 				if (membersToIgnore.Contains(mi.Name)) continue;
 
@@ -99,7 +102,7 @@ namespace MoonSharp.Interpreter.Interop
 			}
 
 			// get properties
-			foreach (PropertyInfo pi in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+			foreach (PropertyInfo pi in Framework.Do.GetProperties(type))
 			{
 				if (pi.IsSpecialName || pi.GetIndexParameters().Any() || membersToIgnore.Contains(pi.Name))
 					continue;
@@ -108,7 +111,7 @@ namespace MoonSharp.Interpreter.Interop
 			}
 
 			// get fields
-			foreach (FieldInfo fi in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+			foreach (FieldInfo fi in Framework.Do.GetFields(type))
 			{
 				if (fi.IsSpecialName || membersToIgnore.Contains(fi.Name))
 					continue;
@@ -117,7 +120,7 @@ namespace MoonSharp.Interpreter.Interop
 			}
 
 			// get events
-			foreach (EventInfo ei in type.GetEvents(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+			foreach (EventInfo ei in Framework.Do.GetEvents(type))
 			{
 				if (ei.IsSpecialName || membersToIgnore.Contains(ei.Name))
 					continue;
@@ -126,14 +129,14 @@ namespace MoonSharp.Interpreter.Interop
 			}
 
 			// get nested types and create statics
-			foreach (Type nestedType in type.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Public))
+			foreach (Type nestedType in Framework.Do.GetNestedTypes(type))
 			{
 				if (membersToIgnore.Contains(nestedType.Name))
 					continue;
 
-				if (!nestedType.IsGenericTypeDefinition)
+				if (!Framework.Do.IsGenericTypeDefinition(nestedType))
 				{
-					if (nestedType.IsNestedPublic || nestedType.GetCustomAttributes(typeof(MoonSharpUserDataAttribute), true).Length > 0)
+					if (Framework.Do.IsNestedPublic(nestedType) || Framework.Do.GetCustomAttributes(nestedType, typeof(MoonSharpUserDataAttribute), true).Length > 0)
 					{
 						var descr = UserData.RegisterType(nestedType, this.AccessMode);
 
@@ -173,7 +176,7 @@ namespace MoonSharp.Interpreter.Interop
 
 		public void PrepareForWiring(Table t)
 		{
-			if (AccessMode == InteropAccessMode.HideMembers || Type.Assembly == this.GetType().Assembly)
+			if (AccessMode == InteropAccessMode.HideMembers || Framework.Do.GetAssembly(Type) == Framework.Do.GetAssembly(this.GetType()))
 			{
 				t.Set("skip", DynValue.NewBoolean(true));
 			}

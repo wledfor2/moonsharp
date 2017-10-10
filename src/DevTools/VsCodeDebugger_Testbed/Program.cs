@@ -13,31 +13,44 @@ namespace VsCodeDebugger_Testbed
 {
 	class Program
 	{
-		const int DEFAULT_PORT = 41912;
-
 		public static void Main(string[] argv)
 		{
-			Script script = new Script();
-			MoonSharpVsCodeDebugServer server = new MoonSharpVsCodeDebugServer(script, DEFAULT_PORT);
-
-			script.AttachDebugger(server.GetDebugger());
-
-			script.DoFile(@"Z:/HDD/temp/lua/fact.lua");
-
-			Closure func = script.Globals.Get("run").Function;
-
+			MoonSharpVsCodeDebugServer server = new MoonSharpVsCodeDebugServer();
+			server.Logger = s => Console.WriteLine(s);
 			server.Start();
 
+			Script script1 = new Script();
+			script1.DoFile(@"Z:/HDD/temp/lua/fact.lua");
+			server.AttachToScript(script1, "Script #1");
+			Closure func1 = script1.Globals.Get("run").Function;
+
+			Script script2 = new Script();
+			script2.DoFile(@"Z:/HDD/temp/lua/fact2.lua");
+			server.AttachToScript(script2, "Script #2");
+			Closure func2 = script2.Globals.Get("run").Function;
+
 			Console.WriteLine("READY.");
+			int i = 0;
+
+			server.Current = null;
 
 			while (true)//(Console.ReadKey().Key != ConsoleKey.Escape)
 			{
+				if (Console.KeyAvailable)
+				{
+					Console.ReadKey();
+					server.Detach(script2);
+					Console.WriteLine("Detached");
+				}
+
+				Closure func = ((++i) % 2) == 0 ? func1 : func2;
+
 				try
 				{
 					var val = func.Call(5);
 					Console.ForegroundColor = ConsoleColor.Magenta;
 					Console.WriteLine(val.Number);
-					System.Threading.Thread.Sleep(5000);
+					System.Threading.Thread.Sleep(1000);
 				}
 				catch (InterpreterException ex)
 				{
@@ -46,8 +59,5 @@ namespace VsCodeDebugger_Testbed
 				}
 			}
 		}
-
-
-
 	}
 }

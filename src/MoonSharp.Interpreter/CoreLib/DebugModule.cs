@@ -65,9 +65,11 @@ namespace MoonSharp.Interpreter.CoreLib
 		public static DynValue setuservalue(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args.AsType(0, "setuservalue", DataType.UserData, false);
-			DynValue t = args.AsType(0, "setuservalue", DataType.Table, true);
+			DynValue t = args.AsType(1, "setuservalue", DataType.Table, true);
 
-			return v.UserData.UserValue = t;
+			v.UserData.UserValue = t;
+
+			return v;
 		}
 
 		[MoonSharpModuleMethod]
@@ -82,9 +84,9 @@ namespace MoonSharp.Interpreter.CoreLib
 			DynValue v = args[0];
 			Script S = executionContext.GetScript();
 
-			if (v.Type.CanHaveTypeMetatables())
+			if (v.Type.CanHaveTypeMetatables() && S.GetTypeMetatable(v.Type) != null)
 				return DynValue.NewTable(S.GetTypeMetatable(v.Type));
-			else if (v.Type == DataType.Table)
+			else if (v.Type == DataType.Table && v.Table.MetaTable != null)
 				return DynValue.NewTable(v.Table.MetaTable);
 			else
 				return DynValue.Nil;
