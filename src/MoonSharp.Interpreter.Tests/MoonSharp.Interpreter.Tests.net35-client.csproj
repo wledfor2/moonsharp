@@ -164,6 +164,10 @@
     <Compile Include="Units\FastStackTests.cs" />
     <Compile Include="Units\InteropTests.cs" />
     <Compile Include="_Hardwired.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsExtensionMethodTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsFieldTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsMethodTests.cs" />
+    <Compile Include="EndToEnd\UserDataNameOptionsPropertiesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoonSharp.Interpreter\MoonSharp.Interpreter.net35-client.csproj">

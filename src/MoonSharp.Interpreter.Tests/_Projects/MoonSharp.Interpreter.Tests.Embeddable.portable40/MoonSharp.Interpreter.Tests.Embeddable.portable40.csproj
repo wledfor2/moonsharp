@@ -197,6 +197,18 @@
     <Compile Include="..\..\_Hardwired.cs">
       <Link>_Hardwired.cs</Link>
     </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsExtensionMethodTests.cs">
+      <Link>UserDataNameOptionsExtensionMethodTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsFieldTests.cs">
+      <Link>UserDataNameOptionsFieldTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsMethodTests.cs">
+      <Link>UserDataNameOptionsMethodTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\EndToEnd\UserDataNameOptionsPropertiesTests.cs">
+      <Link>UserDataNameOptionsPropertiesTests.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
