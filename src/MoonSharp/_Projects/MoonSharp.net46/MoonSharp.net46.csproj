@@ -7,7 +7,7 @@
     <ProjectGuid>{390CEC86-A25B-4DB3-B7A0-AC1D1C035023}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MoonSharp.net46</RootNamespace>
-    <AssemblyName>MoonSharp.net46</AssemblyName>
+    <AssemblyName>MoonSharp</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

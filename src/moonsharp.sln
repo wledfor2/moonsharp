@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FA582319
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestRunners", "TestRunners", "{023F1F7D-5F49-430F-9CC4-5FF891439548}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{32D6B30B-3970-45A0-AE63-2150CAEC325A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonSharp.Interpreter.net46", "MoonSharp.Interpreter\_Projects\MoonSharp.Interpreter.net46\MoonSharp.Interpreter.net46.csproj", "{9AA60571-754D-442E-922D-CFC7CC66808C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonSharp.Interpreter.Tests.net46", "MoonSharp.Interpreter.Tests\_Projects\MoonSharp.Interpreter.Tests.net46\MoonSharp.Interpreter.Tests.net46.csproj", "{1E2035E1-C1BD-4C15-AC03-660D0A190E4E}"
