@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3391BDE-A79D-4CA0-899E-B308F451C075}</ProjectGuid>
+    <ProjectGuid>{390CEC86-A25B-4DB3-B7A0-AC1D1C035023}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleTestRunner.net46</RootNamespace>
-    <AssemblyName>ConsoleTestRunner</AssemblyName>
+    <RootNamespace>MoonSharp.net46</RootNamespace>
+    <AssemblyName>MoonSharp.net46</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,29 +40,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HardwireAndLogPolicy.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\Commands\CommandManager.cs" />
+    <Compile Include="..\..\Commands\Implementations\CompileCommand.cs" />
+    <Compile Include="..\..\Commands\Implementations\ExitCommand.cs" />
+    <Compile Include="..\..\Commands\Implementations\HardWireCommand.cs" />
+    <Compile Include="..\..\Commands\Implementations\HelpCommand.cs" />
+    <Compile Include="..\..\Commands\ICommand.cs" />
+    <Compile Include="..\..\Commands\Implementations\RegisterCommand.cs" />
+    <Compile Include="..\..\Commands\Implementations\RunCommand.cs" />
+    <Compile Include="..\..\Program.cs" />
+    <Compile Include="..\..\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\ShellContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MoonSharp.Interpreter\_Projects\MoonSharp.Interpreter.net46\MoonSharp.Interpreter.net46.csproj">
+      <Project>{9AA60571-754D-442E-922D-CFC7CC66808C}</Project>
+      <Name>MoonSharp.Hardwire.net46</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MoonSharp.Hardwire\_Projects\MoonSharp.HardWire.net46\MoonSharp.HardWire.net46.csproj">
+      <Project>{487C1507-DD18-44F9-81D1-EAD67F943B2D}</Project>
+      <Name>MoonSharp.Interpreter.net46</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="aotregen.sh">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="aottest.sh">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MoonSharp.Interpreter.Tests\_Projects\MoonSharp.Interpreter.Tests.net46\MoonSharp.Interpreter.Tests.net46.csproj">
-      <Project>{1e2035e1-c1bd-4c15-ac03-660d0a190e4e}</Project>
-      <Name>MoonSharp.Interpreter.Tests.net46</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MoonSharp.Interpreter\_Projects\MoonSharp.Interpreter.net46\MoonSharp.Interpreter.net46.csproj">
-      <Project>{9AA60571-754D-442E-922D-CFC7CC66808C}</Project>
-      <Name>MoonSharp.Interpreter.net46</Name>
-    </ProjectReference>
+    <Content Include="..\..\moonsharp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
