@@ -111,7 +111,6 @@
   <ItemGroup>
     <Compile Include="Commands\CommandManager.cs" />
     <Compile Include="Commands\Implementations\CompileCommand.cs" />
-    <Compile Include="Commands\Implementations\DebugCommand.cs" />
     <Compile Include="Commands\Implementations\ExitCommand.cs" />
     <Compile Include="Commands\Implementations\HardWireCommand.cs" />
     <Compile Include="Commands\Implementations\HelpCommand.cs" />
